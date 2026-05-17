@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rag-auditor"
+version = "0.2.0"
+description = "CLI tool to audit RAG pipelines for failure modes"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "nikhilsana1004" }]
+dependencies = [
+    "typer>=0.12",
+    "rich>=13",
+    "numpy>=1.26",
+    "scikit-learn>=1.4",
+    "pdfplumber>=0.11",
+    "python-docx>=1.1",
+    "pypdf>=4",
+]
+
+[project.optional-dependencies]
+embeddings = ["sentence-transformers>=3"]
+anthropic  = ["anthropic>=0.30"]
+openai     = ["openai>=1.30"]
+cohere     = ["cohere>=5"]
+all        = ["sentence-transformers>=3","anthropic>=0.30","openai>=1.30","cohere>=5"]
+dev        = ["pytest>=8","ruff"]
+
+[project.scripts]
+rag-audit = "rag_auditor.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["rag_auditor*"]
